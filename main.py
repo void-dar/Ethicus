@@ -1,12 +1,18 @@
 from fastapi import FastAPI, HTTPException, status, Path
+from fastapi.middleware.cors import CORSMiddleware
 from .db.main import get_db, init_db
 from .models import User, Login, Del
 
 
 
 app = FastAPI(title="Vun",
-              description="project in ehucal hacking")
+              description="project in ethical hacking")
 
+app.add_middleware(CORSMiddleware,
+                   allow_origins = ["*"],
+                   allow_credentials = True,
+                   allow_methods=["*"],
+                   allow_headers=["*"],)
 
 @app.on_event("startup")
 def init():
